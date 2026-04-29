@@ -5,6 +5,34 @@
 </head>
 <body>
   <h1>🚗 Gravity Cars Zanzibar</h1>
-  <p>Website yako iko LIVE!</p>
+
+  <h2>Book a Car</h2>
+  <input id="name" placeholder="Your Name"><br><br>
+  <input id="phone" placeholder="Phone"><br><br>
+  <button onclick="bookCar()">Book Now</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <script>
+    const supabase = window.supabase.createClient(
+      "https://dhkriuptozyqoyfezkpc.supabase.co",
+      "PASTE_YOUR_PUBLISHABLE_KEY_HERE"
+    );
+
+    async function bookCar() {
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+
+      const { data, error } = await supabase
+        .from("bookings")
+        .insert([{ name, phone }]);
+
+      if (error) {
+        alert("Error: " + error.message);
+      } else {
+        alert("Booking successful!");
+      }
+    }
+  </script>
 </body>
 </html>

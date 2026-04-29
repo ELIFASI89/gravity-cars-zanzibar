@@ -4,6 +4,7 @@
   <title>Gravity Cars Zanzibar</title>
 </head>
 <body>
+
   <h1>🚗 Gravity Cars Zanzibar</h1>
 
   <h2>Book a Car</h2>
@@ -16,16 +17,16 @@
   <script>
     const supabase = window.supabase.createClient(
       "https://dhkriuptozyqoyfezkpc.supabase.co",
-      "PASTE_YOUR_PUBLISHABLE_KEY_HERE"
+      "sb_publishable_..."
     );
 
     async function bookCar() {
       const name = document.getElementById("name").value;
       const phone = document.getElementById("phone").value;
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("bookings")
-        .insert([{ name, phone }]);
+        .insert([{ name: name, phone: phone }]);
 
       if (error) {
         alert("Error: " + error.message);
@@ -34,5 +35,6 @@
       }
     }
   </script>
+
 </body>
 </html>

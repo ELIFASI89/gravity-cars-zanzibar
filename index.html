@@ -232,7 +232,7 @@ async function bookCar() {
   }
 
   const { error } = await supabaseClient
-    .from("bookings")
+    .from("booking")
     .insert([{ name: name, phone: phone, car: car }]);
 
   if (error) {

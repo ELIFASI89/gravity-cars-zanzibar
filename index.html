@@ -193,9 +193,11 @@
 
 <section class="booking">
   <h2>Book Your Car</h2>
+
   <input id="name" placeholder="Your Name"><br><br>
   <input id="phone" placeholder="Phone Number"><br><br>
   <input id="car" placeholder="Car Name"><br><br>
+
   <button class="btn" onclick="bookCar()">Submit Booking</button>
 </section>
 
@@ -211,16 +213,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-let slides = document.querySelectorAll('.slide');
-let index = 0;
-
-setInterval(() => {
-  slides[index].classList.remove('active');
-  index = (index + 1) % slides.length;
-  slides[index].classList.add('active');
-}, 3000);
-
 const supabaseClient = window.supabase.createClient(
   "https://dhkriuptozyqoyfezkpc.supabase.co",
   "sb_publishable_oafog08NEEQ2QHlp6d3dYw_fWTOlZlh"

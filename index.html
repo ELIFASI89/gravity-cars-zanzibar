@@ -104,6 +104,22 @@
   font-size: 40px;
   color: #00ff66;
 }
+    .car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.car img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.car {
+  background: #111;
+  padding: 15px;
+  border-radius: 10px;
+}
   </style>
 </head>
 
@@ -139,16 +155,30 @@
 <section class="cars">
   <h2>Our Cars</h2>
 
-  <div class="car">
-    <h3>Toyota Prado</h3>
-    <p>$80/day</p>
-  </div>
+  <div class="car-grid">
 
-  <div class="car">
-    <h3>Suzuki Alto</h3>
-    <p>$30/day</p>
-  </div>
+    <div class="car">
+      <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d">
+      <h3>Toyota Prado</h3>
+      <p>$80/day</p>
+      <a href="https://wa.me/255712484116"><button class="btn">Book Now</button></a>
+    </div>
 
+    <div class="car">
+      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442">
+      <h3>Suzuki Alto</h3>
+      <p>$30/day</p>
+      <a href="https://wa.me/255712484116"><button class="btn">Book Now</button></a>
+    </div>
+
+    <div class="car">
+      <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c">
+      <h3>Toyota Noah</h3>
+      <p>$50/day</p>
+      <a href="https://wa.me/255712484116"><button class="btn">Book Now</button></a>
+    </div>
+
+  </div>
 </section>
 
 <footer>

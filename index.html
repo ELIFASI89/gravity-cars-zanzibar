@@ -1,40 +1,110 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Gravity Cars Zanzibar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #0b0b0b;
+      color: white;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background: black;
+      align-items: center;
+    }
+
+    header h2 {
+      color: #00ff66;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(black, #003300);
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      color: #00ff66;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      background: #00ff66;
+      color: black;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .cars {
+      padding: 40px;
+      text-align: center;
+    }
+
+    .car {
+      background: #111;
+      margin: 15px;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    footer {
+      background: black;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>🚗 Gravity Cars Zanzibar</h1>
+<header>
+  <h2>🚗 Gravity Cars</h2>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Cars</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
 
-  <h2>Book a Car</h2>
-  <input id="name" placeholder="Your Name"><br><br>
-  <input id="phone" placeholder="Phone"><br><br>
-  <button onclick="bookCar()">Book Now</button>
+<section class="hero">
+  <h1>Rent a Car in Zanzibar</h1>
+  <p>Driven by Trust. Moved by Quality.</p>
+  <button class="btn">Book Now</button>
+</section>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<section class="cars">
+  <h2>Our Cars</h2>
 
-  <script>
-    const supabase = window.supabase.createClient(
-      "https://dhkriuptozyqoyfezkpc.supabase.co",
-      "sb_publishable_..."
-    );
+  <div class="car">
+    <h3>Toyota Prado</h3>
+    <p>$80/day</p>
+  </div>
 
-    async function bookCar() {
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
+  <div class="car">
+    <h3>Suzuki Alto</h3>
+    <p>$30/day</p>
+  </div>
 
-      const { error } = await supabase
-        .from("bookings")
-        .insert([{ name: name, phone: phone }]);
+</section>
 
-      if (error) {
-        alert("Error: " + error.message);
-      } else {
-        alert("Booking successful!");
-      }
-    }
-  </script>
+<footer>
+  <p>© Gravity Cars Zanzibar</p>
+</footer>
 
 </body>
 </html>

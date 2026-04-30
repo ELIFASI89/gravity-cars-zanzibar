@@ -206,7 +206,9 @@
    💬
 </a>
 
- <script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
 let slides = document.querySelectorAll('.slide');
 let index = 0;
 
@@ -216,10 +218,7 @@ setInterval(() => {
   slides[index].classList.add('active');
 }, 3000);
 
-const supabase = window.supabase.createClient(
-  "https://dhkriuptozyqoyfezkpc.supabase.co",
-  "sb_publishable_YOUR_KEY"
-);
+"sb_publishable_abc123xyz456..."
 
 async function bookCar() {
   const name = document.getElementById("name").value;
@@ -236,8 +235,7 @@ async function bookCar() {
     alert("Booking saved successfully!");
   }
 }
-    
- </script>
+</script>
   
 </body>
 </html>

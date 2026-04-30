@@ -230,11 +230,9 @@ async function bookCar() {
     alert("Please fill all fields");
     return;
   }
-
-  const { error } = await supabaseClient
-    .from("booking")
-    .insert([{ name: name, phone: phone, car: car }]);
-
+const { error } = await supabaseClient
+  .from("Booking")
+  .insert([{ Name: name, Phone: phone, Car: car }]);
   if (error) {
     alert("Error: " + error.message);
   } else {

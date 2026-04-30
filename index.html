@@ -154,59 +154,12 @@
     <h1>Drive Zanzibar in Style</h1>
     <p>Reliable • Affordable • 24/7 Service</p>
 
-    <a href="https://wa.me/255712484116">
-      <button class="btn">Book on WhatsApp</button>
-    </a>
-  </div>
-
-</section>
-
-<section class="cars">
-  <h2>Our Cars</h2>
-
-  <div class="car-grid">
-
-    <div class="car">
-      <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d">
-      <h3>Toyota Prado</h3>
-      <p>$80/day</p>
-      <a href="https://wa.me/255712484116"><button class="btn">Book Now</button></a>
-    </div>
-
-    <div class="car">
-      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442">
-      <h3>Suzuki Alto</h3>
-      <p>$30/day</p>
-      <a href="https://wa.me/255712484116"><button class="btn">Book Now</button></a>
-    </div>
-
-    <div class="car">
-      <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c">
-      <h3>Toyota Noah</h3>
-      <p>$50/day</p>
-      <a href="https://wa.me/255712484116"><button class="btn">Book Now</button></a>
-    </div>
-<section class="booking">
-  <h2>Book Your Car</h2>
-
-  <input id="name" placeholder="Your Name"><br><br>
-  <input id="phone" placeholder="Phone Number"><br><br>
-  <input id="car" placeholder="Car Name"><br><br>
-
-  <button class="btn" onclick="bookCar()">Submit Booking</button>
-</section>
-  </div>
-</section>
-
-<footer>
-  <p>© Gravity Cars Zanzibar</p>
-</footer>
-<a href="https://wa.me/255712484116" 
+    <a href="https://wa.me/255712484116" 
    style="position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:15px; border-radius:50%;">
    💬
 </a>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 let slides = document.querySelectorAll('.slide');
@@ -218,16 +171,24 @@ setInterval(() => {
   slides[index].classList.add('active');
 }, 3000);
 
-"sb_publishable_abc123xyz456..."
+const supabaseClient = window.supabase.createClient(
+  "https://dhkriuptozyqoyfezkpc.supabase.co",
+  "WEKA_KEY_YAKO_HALISI_HAPA"
+);
 
 async function bookCar() {
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
   const car = document.getElementById("car").value;
 
-  const { error } = await supabase
+  if (!name || !phone || !car) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  const { error } = await supabaseClient
     .from("bookings")
-    .insert([{ name, phone, car }]);
+    .insert([{ name: name, phone: phone, car: car }]);
 
   if (error) {
     alert("Error: " + error.message);
@@ -236,6 +197,6 @@ async function bookCar() {
   }
 }
 </script>
-  
+
 </body>
 </html>

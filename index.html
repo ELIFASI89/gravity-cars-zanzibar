@@ -120,6 +120,15 @@
   padding: 15px;
   border-radius: 10px;
 }
+    .booking {
+  padding: 40px;
+  text-align: center;
+}
+
+.booking input {
+  padding: 10px;
+  width: 250px;
+}
   </style>
 </head>
 
@@ -177,7 +186,15 @@
       <p>$50/day</p>
       <a href="https://wa.me/255712484116"><button class="btn">Book Now</button></a>
     </div>
+<section class="booking">
+  <h2>Book Your Car</h2>
 
+  <input id="name" placeholder="Your Name"><br><br>
+  <input id="phone" placeholder="Phone Number"><br><br>
+  <input id="car" placeholder="Car Name"><br><br>
+
+  <button class="btn" onclick="bookCar()">Submit Booking</button>
+</section>
   </div>
 </section>
 
@@ -198,5 +215,14 @@ setInterval(() => {
   index = (index + 1) % slides.length;
   slides[index].classList.add('active');
 }, 3000);
+
+async function bookCar() {
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const car = document.getElementById("car").value;
+
+  alert("Booking sent! We will contact you on WhatsApp.");
+}
+    
   </script>
 </html>

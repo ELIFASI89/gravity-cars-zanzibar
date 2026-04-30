@@ -216,12 +216,25 @@ setInterval(() => {
   slides[index].classList.add('active');
 }, 3000);
 
+const supabase = window.supabase.createClient(
+  "https://dhkriuptozyqoyfezkpc.supabase.co",
+  "sb_publishable_YOUR_KEY"
+);
+
 async function bookCar() {
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
   const car = document.getElementById("car").value;
 
-  alert("Booking sent! We will contact you on WhatsApp.");
+  const { error } = await supabase
+    .from("bookings")
+    .insert([{ name, phone, car }]);
+
+  if (error) {
+    alert("Error: " + error.message);
+  } else {
+    alert("Booking saved successfully!");
+  }
 }
     
   </script>

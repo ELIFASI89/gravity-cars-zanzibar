@@ -188,7 +188,7 @@
 </footer>
   
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 const supabaseClient = window.supabase.createClient(
@@ -196,7 +196,6 @@ const supabaseClient = window.supabase.createClient(
   "sb_publishable_oafog08NEEQ2QHlp6d3dYw_fWTOlZlh"
 );
 
-// BOOK CAR
 async function bookCar() {
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
@@ -216,9 +215,10 @@ async function bookCar() {
   } else {
     alert("Booking saved!");
   }
+}
 
 async function loadBookings() {
-  alert("imeanza"); // 👈 lazima ionekane
+  alert("imeanza");
 
   const { data, error } = await supabaseClient
     .from("Booking")
@@ -229,7 +229,7 @@ async function loadBookings() {
     return;
   }
 
-  alert("data length: " + data.length); // 👈 kuona kama data ipo
+  alert("data length: " + data.length);
 
   document.getElementById("bookingsList").innerHTML =
     data.map(b => `
@@ -238,9 +238,6 @@ async function loadBookings() {
       </div>
     `).join("");
 }
-}
-  
 </script>
-
 </body>
 </html>

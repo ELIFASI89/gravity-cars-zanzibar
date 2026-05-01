@@ -204,71 +204,52 @@
 
 
   
- <h2>Admin - Bookings</h2>
-  <button class="btn" onclick="loadBookings()">Load Bookings</button>
+<!-- Admin Section -->
+  <h2>Admin - Bookings</h2>
+  <button class="btn" id="loadBtn">Load Bookings</button>
   <div id="bookingsList"></div>
-  
-<footer>
-  <p>© Gravity Cars Zanzibar</p>
-</footer>
 
-<a href="https://wa.me/255712484116" 
-   style="position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:15px; border-radius:50%;">
-   💬
-</a>
-  
+  <footer>
+    <p>© Gravity Cars Zanzibar</p>
+  </footer>
 
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+  <script>
+  // ikiwa kuna error juu ya page, JS haisomi. Hii itatusaidia kuona
+  console.log("JS imeanza kusoma");
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  const supabaseClient = window.supabase.createClient(
+    "https://dhkriuptozyqoyfezkpc.supabase.co",
+    "sb_publishable_oafog08NEEQ2QHlp6d3dYw_fWTOlZlh"
+  );
 
-<script>
-const supabaseClient = window.supabase.createClient(
-  "https://dhkriuptozyqoyfezkpc.supabase.co",
-  "sb_publishable_oafog08NEEQ2QHlp6d3dYw_fWTOlZlh"
-);
+  // tunatumia addEventListener badala ya onclick
+  document.getElementById("loadBtn").addEventListener("click", loadBookings);
 
-// BOOK CAR
-async function bookCar() {
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const car = document.getElementById("car").value;
+  async function loadBookings() {
+    alert("button imefanya kazi"); // test ya kwanza
 
-  if (!name || !phone || !car) {
-    alert("Please fill all fields");
-    return;
+    const { data, error } = await supabaseClient
+      .from("Booking")
+      .select("*");
+
+    if (error) {
+      alert("Error: " + error.message);
+      return;
+    }
+
+    document.getElementById("bookingsList").innerHTML =
+      data.map(b => `
+        <div style="background:#111; margin:10px; padding:10px; border-radius:10px;">
+          <b>${b.Name}</b><br>
+          ${b.Phone}<br>
+          ${b.Car}
+        </div>
+      `).join("");
   }
+  </script>
 
-  const { error } = await supabaseClient
-    .from("Booking")
-    .insert([{ Name: name, Phone: phone, Car: car }]);
-
-  if (error) {
-    alert("Error: " + error.message);
-  } else {
-    window.location.href = `https://wa.me/255712484116?text=Hello, I have booked ${car}. My name is ${name} and phone is ${phone}`;
-  }
-}
-
-// LOAD BOOKINGS
-async function loadBookings() {
-  const { data, error } = await supabaseClient
-    .from("Booking")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    alert("Error: " + error.message);
-    return;
-  }
-
-  document.getElementById("bookingsList").innerHTML =
-    data.map(b => `
-      <div style="background:#111; margin:10px; padding:10px; border-radius:10px;">
-        <b>${b.Name}</b><br>
-        Phone: ${b.Phone}<br>
-        Car: ${b.Car}
-      </div>
-    `).join("");
-}
-</script>
+</body>
+</html>

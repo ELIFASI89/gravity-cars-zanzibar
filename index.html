@@ -242,10 +242,10 @@ const { error } = await supabaseClient
   .from("Booking")
   .insert([{ Name: name, Phone: phone, Car: car }]);
   if (error) {
-    alert("Error: " + error.message);
-  } else {
-    alert("Booking saved successfully!");
-  }
+  alert("Error: " + error.message);
+} else {
+  window.location.href = `https://wa.me/255712484116?text=Hello, I have booked ${car}. My name is ${name} and phone is ${phone}`;
+}
   async function loadBookings() {
   const { data, error } = await supabaseClient
     .from("Booking")

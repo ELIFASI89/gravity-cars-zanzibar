@@ -213,43 +213,64 @@
 </footer>
   
 
-  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script>
-  // ikiwa kuna error juu ya page, JS haisomi. Hii itatusaidia kuona
-  console.log("JS imeanza kusoma");
+<script>
+const supabaseClient = window.supabase.createClient(
+  "https://dhkriuptozyqoyfezkpc.supabase.co",
+  "sb_publishable_oafog08NEEQ2QHlp6d3dYw_fWTOlZlh"
+);
 
-  const supabaseClient = window.supabase.createClient(
-    "https://dhkriuptozyqoyfezkpc.supabase.co",
-    "sb_publishable_oafog08NEEQ2QHlp6d3dYw_fWTOlZlh"
-  );
+// BOOK CAR
+async function bookCar() {
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const car = document.getElementById("car").value;
 
-  // tunatumia addEventListener badala ya onclick
-  document.getElementById("loadBtn").addEventListener("click", loadBookings);
-
-  async function loadBookings() {
-    alert("button imefanya kazi"); // test ya kwanza
-
-    const { data, error } = await supabaseClient
-      .from("Booking")
-      .select("*");
-
-    if (error) {
-      alert("Error: " + error.message);
-      return;
-    }
-
-    document.getElementById("bookingsList").innerHTML =
-      data.map(b => `
-        <div style="background:#111; margin:10px; padding:10px; border-radius:10px;">
-          <b>${b.Name}</b><br>
-          ${b.Phone}<br>
-          ${b.Car}
-        </div>
-      `).join("");
+  if (!name || !phone || !car) {
+    alert("Please fill all fields");
+    return;
   }
-  </script>
+
+  const { error } = await supabaseClient
+    .from("Booking")
+    .insert([{ Name: name, Phone: phone, Car: car }]);
+
+  if (error) {
+    alert("Error: " + error.message);
+  } else {
+    alert("Booking saved!");
+  }
+}
+
+// LOAD BOOKINGS (👇 HII NDIO ULIYOULIZA)
+async function loadBookings() {
+  const { data, error } = await supabaseClient
+    .from("Booking")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    alert("Error: " + error.message);
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    document.getElementById("bookingsList").innerHTML = "<p>No bookings yet</p>";
+    return;
+  }
+
+  document.getElementById("bookingsList").innerHTML =
+    data.map(b => `
+      <div style="background:#111; margin:10px; padding:15px; border-radius:10px;">
+        <strong>${b.Name}</strong><br>
+        Phone: ${b.Phone}<br>
+        Car: ${b.Car}<br>
+        Date: ${b.created_at || ""}
+      </div>
+    `).join("");
+}
+</script>
 
 </body>
 </html>

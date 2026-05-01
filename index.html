@@ -247,25 +247,26 @@ async function loadBookings() {
     .from("Booking")
     .select("*");
 
+  console.log(data); // 👈 muhimu sana
+
   if (error) {
     alert("Error: " + error.message);
     return;
   }
 
-  if (!data || data.length === 0) {
-    document.getElementById("bookingsList").innerHTML = "<p>No bookings yet</p>";
+  if (!data) {
+    alert("No data returned");
     return;
   }
 
   document.getElementById("bookingsList").innerHTML =
     data.map(b => `
-      <div style="background:#111; margin:10px; padding:15px; border-radius:10px;">
-        <strong>${b.Name}</strong><br>
-        Phone: ${b.Phone}<br>
-        Car: ${b.Car}
+      <div style="background:#111; margin:10px; padding:10px; border-radius:10px;">
+        <b>${b.Name}</b><br>
+        ${b.Phone}<br>
+        ${b.Car || ""}
       </div>
     `).join("");
-}
 }
 </script>
 

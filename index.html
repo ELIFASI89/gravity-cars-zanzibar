@@ -235,47 +235,82 @@ async function loadBookings() {
     </a>
   </div>
 
-  <div class="car">
-    <img src="https://images.unsplash.com/photo-1549924231-f129b911e442">
-    <h3>Suzuki Alto</h3>
-    <p>$30/day</p>
-    <a href="https://wa.me/255712484116?text=Hello%20Gravity%20Cars%20Zanzibar,%20I%20want%20to%20book%20Suzuki%20Alto">
-      <button class="btn">Book on WhatsApp</button>
-    </a>
-  </div>
+  <d<!DOCTYPE html>
+<html>
+<head>
+  <title>Gravity Cars Zanzibar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { margin:0; font-family:Arial; background:#050505; color:white; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:15px 8%; background:#000; }
+    nav a { color:white; margin-left:20px; text-decoration:none; font-weight:bold; }
+    .hero { padding:90px 8%; background:linear-gradient(black,#003300); }
+    .hero h1 { color:#00ff66; font-size:45px; }
+    .btn { padding:14px 28px; background:#00ff66; border:0; border-radius:8px; font-weight:bold; }
+    .cars,.booking { padding:50px 8%; text-align:center; }
+    .car-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+    .car { background:#111; padding:20px; border-radius:15px; }
+    .car img { width:100%; height:200px; object-fit:cover; border-radius:10px; }
+    input { padding:14px; width:90%; max-width:400px; margin:8px; }
+    footer { background:#000; text-align:center; padding:25px; }
+  </style>
+</head>
 
-  <div class="car">
-    <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c">
-    <h3>Toyota Noah</h3>
-    <p>$50/day</p>
-    <a href="https://wa.me/255712484116?text=Hello%20Gravity%20Cars%20Zanzibar,%20I%20want%20to%20book%20Toyota%20Noah">
-      <button class="btn">Book on WhatsApp</button>
-    </a>
-  </div>
+<body>
 
-</div>
+<header>
+  <h2>Gravity Cars</h2>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Cars</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Drive Zanzibar in Style</h1>
+  <p>Reliable • Affordable • 24/7 Service</p>
+</section>
+
+<section class="cars">
+  <h2>Our Cars</h2>
+  <div class="car-grid">
+    <div class="car">
+      <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d">
+      <h3>Toyota Prado</h3>
+      <p>$80/day</p>
+    </div>
+
+    <div class="car">
+      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442">
+      <h3>Suzuki Alto</h3>
+      <p>$30/day</p>
+    </div>
+
+    <div class="car">
+      <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c">
+      <h3>Toyota Noah</h3>
+      <p>$50/day</p>
+    </div>
+  </div>
 </section>
 
 <section class="booking">
   <h2>Book Your Car</h2>
-
-  <input id="name" placeholder="Your Name"><br><br>
-  <input id="phone" placeholder="Phone Number"><br><br>
-  <input id="car" placeholder="Car Name"><br><br>
-
+  <input id="name" placeholder="Your Name"><br>
+  <input id="phone" placeholder="Phone Number"><br>
+  <input id="car" placeholder="Car Name"><br>
   <button class="btn" onclick="bookCar()">Submit Booking</button>
+
+  <h2>Admin - Bookings</h2>
+  <button class="btn" onclick="loadBookings()">Load Bookings</button>
+  <div id="bookingsList"></div>
 </section>
 
-<!-- 👇 HAPA NDIPO UNAWEKA -->
-<h2>Admin - Bookings</h2>
-<button class="btn" onclick="loadBookings()">Load Bookings</button>
-<div id="bookingsList"></div>
-
-<!-- Footer -->
 <footer>
   <p>© Gravity Cars Zanzibar</p>
 </footer>
-  
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -306,8 +341,6 @@ async function bookCar() {
 }
 
 async function loadBookings() {
-  alert("imeanza");
-
   const { data, error } = await supabaseClient
     .from("Booking")
     .select("*");
@@ -317,15 +350,14 @@ async function loadBookings() {
     return;
   }
 
-  alert("data length: " + data.length);
-
   document.getElementById("bookingsList").innerHTML =
     data.map(b => `
-      <div style="background:#111; margin:10px; padding:10px;">
+      <div style="background:#111; margin:10px auto; padding:15px; max-width:400px; border-radius:10px;">
         ${b.Name} - ${b.Phone} - ${b.Car}
       </div>
     `).join("");
 }
 </script>
+
 </body>
 </html>

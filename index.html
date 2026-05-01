@@ -230,43 +230,8 @@ const supabaseClient = window.supabase.createClient(
   "sb_publishable_oafog08NEEQ2QHlp6d3dYw_fWTOlZlh"
 );
 
+// BOOK CAR
 async function bookCar() {
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const car = document.getElementById("car").value;
-
-  if (!name || !phone || !car) {
-    alert("Please fill all fields");
-    return;
-  }
-const { error } = await supabaseClient
-  .from("Booking")
-  .insert([{ Name: name, Phone: phone, Car: car }]);
-  if (error) {
-  alert("Error: " + error.message);
-} else {
-  window.location.href = `https://wa.me/255712484116?text=Hello, I have booked ${car}. My name is ${name} and phone is ${phone}`;
-}
-  async function loadBookings() {
-  const { data, error } = await supabaseClient
-    .from("Booking")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    alert("Error: " + error.message);
-    return;
-  }
-
-  document.getElementById("bookingsList").innerHTML = data.map(b => `
-    <div style="background:#111; margin:10px auto; padding:15px; border-radius:10px; max-width:400px;">
-      <strong>${b.Name}</strong><br>
-      Phone: ${b.Phone}<br>
-      Car: ${b.Car}<br>
-      Date: ${b.created_at}
-    </div>
-  `).join("");
-  async function bookCar() {
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
   const car = document.getElementById("car").value;
@@ -286,7 +251,26 @@ const { error } = await supabaseClient
     window.location.href = `https://wa.me/255712484116?text=Hello, I have booked ${car}. My name is ${name} and phone is ${phone}`;
   }
 }
-</script>
 
-</body>
-</html>
+// LOAD BOOKINGS
+async function loadBookings() {
+  const { data, error } = await supabaseClient
+    .from("Booking")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    alert("Error: " + error.message);
+    return;
+  }
+
+  document.getElementById("bookingsList").innerHTML =
+    data.map(b => `
+      <div style="background:#111; margin:10px; padding:10px; border-radius:10px;">
+        <b>${b.Name}</b><br>
+        Phone: ${b.Phone}<br>
+        Car: ${b.Car}
+      </div>
+    `).join("");
+}
+</script>

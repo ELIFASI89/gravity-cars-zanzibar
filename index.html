@@ -266,9 +266,24 @@ const { error } = await supabaseClient
       Date: ${b.created_at}
     </div>
   `).join("");
-  }
   async function bookCar() {
-  alert("button working");
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const car = document.getElementById("car").value;
+
+  if (!name || !phone || !car) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("Booking")
+    .insert([{ Name: name, Phone: phone, Car: car }]);
+
+  if (error) {
+    alert("Error: " + error.message);
+  } else {
+    window.location.href = `https://wa.me/255712484116?text=Hello, I have booked ${car}. My name is ${name} and phone is ${phone}`;
   }
 }
 </script>

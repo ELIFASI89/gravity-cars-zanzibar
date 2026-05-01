@@ -243,28 +243,23 @@ async function bookCar() {
   }
 
 async function loadBookings() {
+  alert("imeanza"); // 👈 lazima ionekane
+
   const { data, error } = await supabaseClient
     .from("Booking")
     .select("*");
-
-  console.log(data); // 👈 muhimu sana
 
   if (error) {
     alert("Error: " + error.message);
     return;
   }
 
-  if (!data) {
-    alert("No data returned");
-    return;
-  }
+  alert("data length: " + data.length); // 👈 kuona kama data ipo
 
   document.getElementById("bookingsList").innerHTML =
     data.map(b => `
-      <div style="background:#111; margin:10px; padding:10px; border-radius:10px;">
-        <b>${b.Name}</b><br>
-        ${b.Phone}<br>
-        ${b.Car || ""}
+      <div style="background:#111; margin:10px; padding:10px;">
+        ${b.Name} - ${b.Phone} - ${b.Car}
       </div>
     `).join("");
 }

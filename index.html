@@ -201,6 +201,12 @@
   <button class="btn" onclick="bookCar()">Submit Booking</button>
 </section>
 
+<section class="booking">
+  <h2>Admin - Bookings</h2>
+  <button class="btn" onclick="loadBookings()">Load Bookings</button>
+  <div id="bookingsList"></div>
+</section>
+  
 <footer>
   <p>© Gravity Cars Zanzibar</p>
 </footer>
@@ -237,6 +243,26 @@ const { error } = await supabaseClient
     alert("Error: " + error.message);
   } else {
     alert("Booking saved successfully!");
+  }
+  async function loadBookings() {
+  const { data, error } = await supabaseClient
+    .from("Booking")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    alert("Error: " + error.message);
+    return;
+  }
+
+  document.getElementById("bookingsList").innerHTML = data.map(b => `
+    <div style="background:#111; margin:10px auto; padding:15px; border-radius:10px; max-width:400px;">
+      <strong>${b.Name}</strong><br>
+      Phone: ${b.Phone}<br>
+      Car: ${b.Car}<br>
+      Date: ${b.created_at}
+    </div>
+  `).join("");
   }
 }
 </script>

@@ -243,12 +243,10 @@ async function bookCar() {
   }
 }
 
-// LOAD BOOKINGS (👇 HII NDIO ULIYOULIZA)
 async function loadBookings() {
   const { data, error } = await supabaseClient
     .from("Booking")
-    .select("*")
-    .order("created_at", { ascending: false });
+    .select("*");
 
   if (error) {
     alert("Error: " + error.message);
@@ -265,8 +263,7 @@ async function loadBookings() {
       <div style="background:#111; margin:10px; padding:15px; border-radius:10px;">
         <strong>${b.Name}</strong><br>
         Phone: ${b.Phone}<br>
-        Car: ${b.Car}<br>
-        Date: ${b.created_at || ""}
+        Car: ${b.Car}
       </div>
     `).join("");
 }
